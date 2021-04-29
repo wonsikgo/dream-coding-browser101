@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window Size</title>
+</head>
+<body>
+    <div class="screen">window.screen: <span class="width"></span> <span class="height"></span></div>
+    <div class="outer">window.outer: <span class="width"></span> <span class="height"></span></div>
+    <div class="inner">window.inner: <span class="width"></span> <span class="height"></span></div>
+    <div class="clientWidth">documentElement.clientWidth: <span class="width"></span> <span class="height"></span></div>
+</body>
+    <script>
+        window.onload = () => {
+            document.querySelector('.screen .width').innerHTML = screen.width;
+            document.querySelector('.screen .height').innerHTML = screen.height;
+            let outerWidth = document.querySelector('.outer .width')
+            let outerHeight = document.querySelector('.outer .height')
+            let innerWidth = document.querySelector('.inner .width')
+            let innerHeight = document.querySelector('.inner .height')
+            let clientWidth = document.querySelector('.clientWidth .width')
+            let clientHeight = document.querySelector('.clientWidth .height')
+            outerWidth.innerHTML = window.outerWidth;
+            outerHeight.innerHTML = window.outerHeight;
+            innerWidth.innerHTML = window.innerWidth;
+            innerHeight.innerHTML = window.innerHeight;
+            clientWidth.innerHTML = document.documentElement.clientWidth;
+            clientHeight.innerHTML = document.documentElement.clientHeight;
+            window.addEventListener('resize', () => {
+                outerWidth.innerHTML = window.outerWidth;
+                outerHeight.innerHTML = window.outerHeight;
+                innerWidth.innerHTML = window.innerWidth;
+                innerHeight.innerHTML = window.innerHeight;
+                clientWidth.innerHTML = document.documentElement.clientWidth;
+                clientHeight.innerHTML = document.documentElement.clientHeight;
+            })
+        }
+    </script>
+</html>
