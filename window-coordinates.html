@@ -4,23 +4,26 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Cooridates</title>
     <style>
       body {
         background-color: black;
       }
       .rect {
-        width: 100px;
-        height: 100px;
+        width: 200px;
+        height: 200px;
         border: 1px solid;
+        border-radius: 4px;
         background-color: beige;
       }
       .active {
-        background-color: orangered;
+        background-color: lightsalmon;
       }
     </style>
   </head>
   <body>
+    <div class="rect"></div>
+    <div class="rect"></div>
     <div class="rect"></div>
     <div class="rect"></div>
     <div class="rect"></div>
@@ -30,12 +33,12 @@
     <div class="rect"></div>
     <div class="rect"></div>
     <script>
-      //   const target = document.querySelector('.rect');
-      document.addEventListener('click', (event) => {
-        const targetInfo = event.target.getBoundingClientRect();
+      const active = document.querySelector('.active');
+      active.addEventListener('click', (event) => {
+        const targetInfo = active.getBoundingClientRect();
         console.log(targetInfo);
-        console.log(`client: ${targetInfo.left}, ${targetInfo.right}`);
-        console.log(`page: ${targetInfo.top}, ${targetInfo.bottom}`);
+        console.log(`client: ${event.clientX}, ${event.clientY}`);
+        console.log(`page: ${event.pageX}, ${event.pageY}`);
       });
     </script>
   </body>
