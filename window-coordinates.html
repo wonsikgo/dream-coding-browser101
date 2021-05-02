@@ -32,15 +32,15 @@
     <div class="rect"></div>
     <div class="rect"></div>
     <div class="rect"></div>
-    <div class="rect"></div>
     <div class="rect active"></div>
+    <div class="rect"></div>
     <div class="rect"></div>
     <div class="rect"></div>
     <div class="rect"></div>
     <div class="button-wrap">
       <button class="scroll-by">Scroll by 100px(y)</button>
       <button class="scroll-to">Scroll to 100px(y)</button>
-      <button class="special">Scroll into special</button>
+      <button class="scroll-into">Scroll into special</button>
     </div>
     <script>
       const active = document.querySelector('.active');
@@ -53,16 +53,15 @@
       });
       const scrollBy = document.querySelector('.scroll-by');
       const scrollTo = document.querySelector('.scroll-to');
-      const special = document.querySelector('.special');
-      let y = 100;
-      scrollBy.addEventListener('click', (event) => {
-        window.scrollTo(0, (y = y + 100));
+      const scrollInto = document.querySelector('.scroll-into');
+      scrollBy.addEventListener('click', () => {
+        window.scrollBy({ top: 100, left: 0, behavior: 'smooth' });
       });
-      scrollTo.addEventListener('click', (event) => {
+      scrollTo.addEventListener('click', () => {
         window.scrollTo(0, 100);
       });
-      special.addEventListener('click', (event) => {
-        window.scrollTo(0, active.offsetTop);
+      scrollInto.addEventListener('click', () => {
+        active.scrollIntoView();
       });
     </script>
   </body>
