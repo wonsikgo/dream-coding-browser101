@@ -3,20 +3,20 @@ body {
   width: 100%;
   height: 100%;
 }
+/*  
 .target {
   position: relative;
-  top: 10px;
-  left: 10px;
 }
 .target img {
   position: relative;
+  top: -70px;
+  left: -70px;
 }
 .target p {
   color: #fff;
   position: absolute;
-  top: 70px;
-  left: 70px;
   font-size: 20px;
+  top: -70px;
 }
 .horizon {
   width: 100%;
@@ -31,4 +31,35 @@ body {
   background-color: #fff;
   position: absolute;
   top: 0;
+}  */
+
+.line {
+  position: absolute;
+  background-color: #fff;
+}
+
+.horozontal {
+  width: 100%;
+  height: 1px;
+  top: 50%;
+}
+.vertical {
+  height: 100%;
+  width: 1px;
+  left: 50%;
+}
+
+.target {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.tag {
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(20px, 20px);
+  font-size: 38px;
 }
