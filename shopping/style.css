@@ -1,0 +1,44 @@
+body {
+  background-color: rgb(201, 216, 216);
+  margin: 0;
+}
+.container {
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 70px;
+  width: 80%;
+}
+header {
+  background-color: rgb(172, 172, 228);
+  line-height: 50px;
+}
+h1 {
+  margin: 0;
+  font-size: 20px;
+}
+ul {
+  margin: 0;
+}
+section {
+  height: 600px;
+  background-color: #fff;
+}
+section .list {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+footer input {
+  width: 100%;
+  height: 26px;
+  outline: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+footer button {
+  background-color: rgb(172, 172, 228);
+  width: 100%;
+  border: 0;
+  line-height: 50px;
+}
