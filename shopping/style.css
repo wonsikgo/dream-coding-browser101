@@ -21,12 +21,20 @@ ul {
 }
 section {
   height: 600px;
+  overflow: auto;
   background-color: #fff;
 }
 section .list {
   display: flex;
   justify-content: space-around;
   padding: 10px;
+}
+section i {
+  transition: all 300ms ease-in;
+}
+section i:hover {
+  color: red;
+  transform: scale(1.1);
 }
 footer input {
   width: 100%;
