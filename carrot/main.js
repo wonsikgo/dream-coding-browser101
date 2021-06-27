@@ -12,8 +12,9 @@ window.onload = () => {
   const lostComment = document.querySelector('.lost-comment');
   const replyComment = document.querySelector('.reply-comment');
 
-  const carrot = document.querySelector('.carrot');
-  const bug = document.querySelector('.bug');
+  const bugSound = document.querySelector('.bug-sound');
+  const carrotSound = document.querySelector('.carrot-sound');
+  const gameWinSound = document.querySelector('.game-win-sound');
 
   const browserWidth = document.documentElement.clientWidth - 80;
   const browserHeight = document.documentElement.clientHeight - 80;
@@ -121,7 +122,9 @@ window.onload = () => {
   function onClickCarrot() {
     carrotCnt = carrotCnt + 1;
     carrotCount.innerHTML = carrotCnt;
+    carrotSound.play();
     if (carrotCnt === 10 && count >= 0) {
+      gameWinSound.play();
       isPlayState = false;
       stopBtn.classList.add('visibility');
       reflashPopup.classList.remove('hidden');
@@ -131,6 +134,7 @@ window.onload = () => {
   }
 
   function onClickBug() {
+    bugSound.play();
     isPlayState = false;
     stopBtn.classList.add('visibility');
     reflashPopup.classList.remove('hidden');
