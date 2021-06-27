@@ -10,6 +10,9 @@ body {
 .hidden {
   display: none;
 }
+.visibility {
+  visibility: hidden;
+}
 .option {
   width: 100%;
   text-align: center;
@@ -35,7 +38,7 @@ body {
   border: 2px solid black;
   border-radius: 5px;
 }
-.option .parrot-count {
+.option .carrot-count {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,7 +53,7 @@ body {
   cursor: pointer;
 }
 .reflash-popup {
-  padding: 0 100px;
+  padding: 0 200px;
   background-color: rgba(5, 1, 1, 0.7);
   font-size: 50px;
   color: #fff;
@@ -69,4 +72,8 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+}
+.field img {
+  cursor: pointer;
+  width: 70px;
 }
