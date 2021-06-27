@@ -56,7 +56,7 @@ window.onload = () => {
 
   function countDown() {
     setTimeout(() => {
-      if (count === 0) {
+      if (count === 0 && carrotCnt < 10) {
         onClickBug();
         return;
       }

@@ -7,6 +7,16 @@ body {
   background-image: url(img/background.png);
   background-size: cover;
 }
+img,
+button {
+  transition: all 0.1s;
+}
+img:hover {
+  transform: scale(1.2);
+}
+button:hover {
+  transform: scale(1.1);
+}
 .hidden {
   display: none;
 }
