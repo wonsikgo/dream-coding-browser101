@@ -62,7 +62,7 @@ button:hover {
   border-radius: 50%;
   cursor: pointer;
 }
-.reflash-popup {
+.reflesh-popup {
   padding: 0 200px;
   background-color: rgba(5, 1, 1, 0.7);
   font-size: 50px;
@@ -75,7 +75,7 @@ button:hover {
   left: 50%;
   transform: translateX(-50%);
 }
-.reflash-popup .comment {
+.reflesh-popup .comment {
   padding: 10px 0 15px 0;
 }
 .field {

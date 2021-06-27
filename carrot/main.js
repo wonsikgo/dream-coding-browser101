@@ -1,12 +1,14 @@
+'use strict';
+
 window.onload = () => {
   const playBtn = document.querySelector('.play');
   const stopBtn = document.querySelector('.stop');
-  const reflashBtn = document.querySelector('.reflash');
+  const refleshBtn = document.querySelector('.reflesh');
 
   const timerCount = document.querySelector('.timer-count');
   const carrotCount = document.querySelector('.carrot-count');
   const field = document.querySelector('.field');
-  const reflashPopup = document.querySelector('.reflash-popup');
+  const refleshPopup = document.querySelector('.reflesh-popup');
 
   const wonComment = document.querySelector('.won-comment');
   const lostComment = document.querySelector('.lost-comment');
@@ -36,16 +38,16 @@ window.onload = () => {
 
   stopBtn.addEventListener('click', () => {
     stopBtn.classList.add('visibility');
-    reflashPopup.classList.remove('hidden');
+    refleshPopup.classList.remove('hidden');
     hideComment();
     replyComment.classList.remove('hidden');
     isPlayState = false;
   });
 
-  reflashBtn.addEventListener('click', () => {
+  refleshBtn.addEventListener('click', () => {
     field.innerHTML = '';
     stopBtn.classList.remove('visibility');
-    reflashPopup.classList.add('hidden');
+    refleshPopup.classList.add('hidden');
     count = 10;
     carrotCnt = 0;
     timerCount.innerHTML = count;
@@ -127,7 +129,7 @@ window.onload = () => {
       gameWinSound.play();
       isPlayState = false;
       stopBtn.classList.add('visibility');
-      reflashPopup.classList.remove('hidden');
+      refleshPopup.classList.remove('hidden');
       hideComment();
       wonComment.classList.remove('hidden');
     }
@@ -137,7 +139,7 @@ window.onload = () => {
     bugSound.play();
     isPlayState = false;
     stopBtn.classList.add('visibility');
-    reflashPopup.classList.remove('hidden');
+    refleshPopup.classList.remove('hidden');
     hideComment();
     lostComment.classList.remove('hidden');
   }
