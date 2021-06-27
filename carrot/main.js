@@ -21,12 +21,14 @@ window.onload = () => {
   // console.log(`browserHeight : ${browserHeight}`);
   console.log(Math.floor(Math.random() * (browserHeight - 500 + 1) + 500));
   let count = 10;
+  let carrotCnt = 0;
   let isPlayState = true;
 
   playBtn.addEventListener('click', () => {
     playBtn.classList.add('hidden');
     stopBtn.classList.remove('hidden');
     timerCount.innerHTML = count;
+    carrotCount.innerHTML = carrotCnt;
     countDown();
     setImagePosition();
   });
@@ -34,6 +36,7 @@ window.onload = () => {
   stopBtn.addEventListener('click', () => {
     stopBtn.classList.add('visibility');
     reflashPopup.classList.remove('hidden');
+    hideComment();
     replyComment.classList.remove('hidden');
     isPlayState = false;
   });
@@ -43,7 +46,9 @@ window.onload = () => {
     stopBtn.classList.remove('visibility');
     reflashPopup.classList.add('hidden');
     count = 10;
+    carrotCnt = 0;
     timerCount.innerHTML = count;
+    carrotCount.innerHTML = carrotCnt;
     isPlayState = true;
     countDown();
     setImagePosition();
@@ -51,6 +56,10 @@ window.onload = () => {
 
   function countDown() {
     setTimeout(() => {
+      if (count === 0) {
+        onClickBug();
+        return;
+      }
       if (count < 1 || !isPlayState) return;
       count = count - 1;
       timerCount.innerHTML = count;
@@ -80,6 +89,7 @@ window.onload = () => {
     carrot.style.left = `${x}px`;
     carrot.addEventListener('click', (e) => {
       field.removeChild(e.target);
+      onClickCarrot();
     });
     return carrot;
   }
@@ -95,6 +105,9 @@ window.onload = () => {
     bug.style.position = 'absolute';
     bug.style.top = `${y}px`;
     bug.style.left = `${x}px`;
+    bug.addEventListener('click', () => {
+      onClickBug();
+    });
     return bug;
   }
 
@@ -103,5 +116,31 @@ window.onload = () => {
   }
   function randomHeightPosition() {
     return Math.floor(Math.random() * (browserHeight - 500 + 1) + 500);
+  }
+
+  function onClickCarrot() {
+    carrotCnt = carrotCnt + 1;
+    carrotCount.innerHTML = carrotCnt;
+    if (carrotCnt === 10 && count >= 0) {
+      isPlayState = false;
+      stopBtn.classList.add('visibility');
+      reflashPopup.classList.remove('hidden');
+      hideComment();
+      wonComment.classList.remove('hidden');
+    }
+  }
+
+  function onClickBug() {
+    isPlayState = false;
+    stopBtn.classList.add('visibility');
+    reflashPopup.classList.remove('hidden');
+    hideComment();
+    lostComment.classList.remove('hidden');
+  }
+
+  function hideComment() {
+    replyComment.classList.add('hidden');
+    lostComment.classList.add('hidden');
+    wonComment.classList.add('hidden');
   }
 };
