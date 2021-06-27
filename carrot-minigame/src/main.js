@@ -1,4 +1,5 @@
 'use strict';
+import PopUp from './popup.js';
 
 const CARROT_SIZE = 80;
 const CARROT_COUNT = 5;
@@ -11,9 +12,9 @@ const gameBtn = document.querySelector('.game__button');
 const gameTimer = document.querySelector('.game__timer');
 const gameScore = document.querySelector('.game__score');
 
-const popUp = document.querySelector('.pop-up');
-const popUpText = document.querySelector('.pop-up__message');
-const popUpReflesh = document.querySelector('.pop-up__reflesh');
+// const popUp = document.querySelector('.pop-up');
+// const popUpText = document.querySelector('.pop-up__message');
+// const popUpReflesh = document.querySelector('.pop-up__reflesh');
 
 const carrotSound = new Audio('./sound/carrot_pull.mp3');
 const bugSound = new Audio('./sound/bug_pull.mp3');
@@ -25,6 +26,11 @@ let started = false;
 let score = 0;
 let timer = undefined;
 
+const gameFinishBanner = new PopUp();
+gameFinishBanner.setClickListener(() => {
+  startGame();
+});
+
 field.addEventListener('click', onFieldClick);
 
 gameBtn.addEventListener('click', () => {
@@ -35,10 +41,10 @@ gameBtn.addEventListener('click', () => {
   }
 });
 
-popUpReflesh.addEventListener('click', () => {
-  startGame();
-  hidePopUp();
-});
+// popUpReflesh.addEventListener('click', () => {
+//   startGame();
+//   hidePopUp();
+// });
 
 function startGame() {
   started = true;
@@ -53,7 +59,8 @@ function stopGame() {
   started = false;
   stopGameTimer();
   hideGameButton();
-  showPopupWidthText('REPLAY 😎');
+  gameFinishBanner.showPopupWidthText('REPLAY 😎');
+  //showPopupWidthText('REPLAY 😎');
   stopSound(bgSound);
   playSound(alertSound);
 }
@@ -69,7 +76,7 @@ function finishGame(win) {
   }
   stopSound(bgSound);
   stopGameTimer();
-  showPopupWidthText(win ? 'YON WON 🎉' : 'YOU LOST 🤢');
+  gameFinishBanner.showPopupWidthText(win ? 'YON WON 🎉' : 'YOU LOST 🤢');
 }
 
 function showStopButton() {
@@ -113,14 +120,14 @@ function updateTimerText(time) {
   gameTimer.innerText = `${minutes}:${seconds}`;
 }
 
-function showPopupWidthText(text) {
-  popUpText.innerText = text;
-  popUp.classList.remove('pop-up--hide');
-}
+// function showPopupWidthText(text) {
+//   popUpText.innerText = text;
+//   popUp.classList.remove('pop-up--hide');
+// }
 
-function hidePopUp() {
-  popUp.classList.add('pop-up--hide');
-}
+// function hidePopUp() {
+//   popUp.classList.add('pop-up--hide');
+// }
 
 function initGame() {
   field.innerHTML = '';
