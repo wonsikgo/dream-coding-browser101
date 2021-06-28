@@ -1,6 +1,7 @@
 'use strict';
 import PopUp from './popup.js';
-import GameBuilder from './game.js';
+import { GameBuilder, Reason } from './game.js';
+import * as sound from './sound.js';
 
 //const CARROT_SIZE = 80;
 // const CARROT_COUNT = 5;
@@ -8,20 +9,26 @@ import GameBuilder from './game.js';
 // const GAME_DURATION_SEC = 5;
 
 const gameFinishBanner = new PopUp();
-
 const game = new GameBuilder().gameDuration(5).carrotCound(5).bugCount(5).build();
+
 game.setGameListener((reason) => {
   console.log(reason);
   let message;
   switch (reason) {
-    case 'cancel':
+    case Reason.cancel:
       message = 'REPLAY 😎';
+      sound.playAlert();
+
       break;
-    case 'win':
+    case Reason.win:
       message = 'YON WON 🎉';
+      sound.playWin();
+
       break;
-    case 'lose':
+    case Reason.lose:
       message = 'YOU LOST 😢';
+      sound.playBug();
+
       break;
     default:
       console.log('error');

@@ -2,8 +2,14 @@
 import Field from './field.js';
 import * as sound from './sound.js';
 
+export const Reason = Object.freeze({
+  win: 'win',
+  lose: 'lose',
+  cancel: 'cancel',
+});
+
 //builder pattern
-export default class GameBuilder {
+export class GameBuilder {
   gameDuration(duration) {
     this.gameDuration = duration;
     return this;
@@ -36,7 +42,7 @@ class Game {
 
     this.gameBtn.addEventListener('click', () => {
       if (this.started) {
-        this.stop();
+        this.stop(Reason.cancel);
       } else {
         this.start();
       }
@@ -58,10 +64,10 @@ class Game {
       this.score++;
       this.updateScoreBoard();
       if (this.score === this.carrotCound) {
-        this.finish(true);
+        this.stop(Reason.win);
       }
     } else if (item === 'bug') {
-      this.finish(false);
+      this.stop(Reason.lose);
     }
   };
 
@@ -78,29 +84,15 @@ class Game {
     sound.playBg();
   }
 
-  stop() {
+  stop(reason) {
     this.started = false;
     this.stopGameTimer();
     this.hideGameButton();
-    sound.playAlert();
     sound.stopBg();
-    this.onGameStop && this.onGameStop('cancel');
-    //this.gameFinishBanner.showPopupWidthText('REPLAY 😎');
-  }
 
-  finish(win) {
-    this.started = false;
-    this.score = 0;
-    this.hideGameButton();
-    if (win) {
-      sound.playWin();
-    } else {
-      sound.playBug();
-    }
-    this.stopGameTimer();
-    sound.stopBg();
-    this.onGameStop && this.onGameStop(win ? 'win' : 'lose');
-    //this.gameFinishBanner.showPopupWidthText(win ? 'YON WON 🎉' : 'YOU LOST 🤢');
+    this.onGameStop && this.onGameStop(reason);
+    //this.gameFinishBanner.showPopupWidthText('REPLAY 😎');
+    //this.score = 0;
   }
 
   showStopButton() {
@@ -124,7 +116,7 @@ class Game {
     this.updateTimerText(remainingTimeSec);
     this.timer = setInterval(() => {
       if (remainingTimeSec <= 0) {
-        this.finish(this.carrotCound === this.score);
+        this.stop(this.carrotCound === this.score ? Reason.win : Reason.lose);
         clearInterval(this.timer);
         return;
       }
