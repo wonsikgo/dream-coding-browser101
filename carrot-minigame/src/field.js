@@ -1,6 +1,6 @@
 'use strict';
 
-import * as sound from './sound';
+import * as sound from './sound.js';
 
 const CARROT_SIZE = 80;
 
@@ -38,11 +38,10 @@ export default class Field {
   }
 
   setClickListener(onItemClick) {
-    console.log(onItemClick);
     this.onItemClick = onItemClick;
   }
 
-  onClick(event) {
+  onClick = (event) => {
     const target = event.target;
     if (target.matches('.carrot')) {
       target.remove();
@@ -51,7 +50,7 @@ export default class Field {
     } else if (target.matches('.bug')) {
       this.onItemClick && this.onItemClick('bug');
     }
-  }
+  };
 }
 
 function randomNumber(min, max) {
