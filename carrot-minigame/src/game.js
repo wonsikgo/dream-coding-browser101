@@ -91,8 +91,6 @@ class Game {
     sound.stopBg();
 
     this.onGameStop && this.onGameStop(reason);
-    //this.gameFinishBanner.showPopupWidthText('REPLAY 😎');
-    //this.score = 0;
   }
 
   showStopButton() {

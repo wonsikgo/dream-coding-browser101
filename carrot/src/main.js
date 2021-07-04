@@ -9,9 +9,7 @@ const carrotCount = document.querySelector('.carrot-count');
 const field = document.querySelector('.field');
 const refleshPopup = document.querySelector('.reflesh-popup');
 
-const wonComment = document.querySelector('.won-comment');
-const lostComment = document.querySelector('.lost-comment');
-const replyComment = document.querySelector('.reply-comment');
+const popupComment = document.querySelector('.comment');
 
 const browserWidth = document.documentElement.clientWidth - 80;
 const browserHeight = document.documentElement.clientHeight - 80;
@@ -31,21 +29,11 @@ playBtn.addEventListener('click', () => {
 });
 
 stopBtn.addEventListener('click', () => {
-  endGame();
+  stopGame();
 });
 
 refleshBtn.addEventListener('click', () => {
-  field.innerHTML = '';
-  stopBtn.classList.remove('visibility');
-  refleshPopup.classList.add('hidden');
-  COUNT = 10;
-  SCORE = 0;
-  timerCount.innerHTML = COUNT;
-  carrotCount.innerHTML = SCORE;
-  isPlayState = true;
-  countDown();
-  setImagePosition();
-  bgSound.play();
+  refleshGame();
 });
 
 function startGame() {
@@ -58,19 +46,32 @@ function startGame() {
   bgSound.play();
 }
 
-function endGame() {
+function stopGame() {
   stopBtn.classList.add('visibility');
   refleshPopup.classList.remove('hidden');
-  hideComment();
-  replyComment.classList.remove('hidden');
+  popupComment.innerText = 'Replay 😎';
   isPlayState = false;
   alertSound.play();
+}
+
+function refleshGame(params) {
+  field.innerHTML = '';
+  stopBtn.classList.remove('visibility');
+  refleshPopup.classList.add('hidden');
+  COUNT = 10;
+  SCORE = 0;
+  timerCount.innerHTML = COUNT;
+  carrotCount.innerHTML = SCORE;
+  isPlayState = true;
+  countDown();
+  setImagePosition();
+  bgSound.play();
 }
 
 function countDown() {
   setTimeout(() => {
     if (COUNT === 0 && SCORE < 10) {
-      onClickBug();
+      onBug();
       return;
     }
     if (COUNT < 1 || !isPlayState) return;
@@ -93,8 +94,6 @@ function createCarrot() {
   const carrot = document.createElement('img');
   const x = randomWidthPosition();
   const y = randomHeightPosition();
-  // console.log(`x : ${x}`);
-  // console.log(`y : ${y}`);
   carrot.setAttribute('src', './img/carrot.png');
   carrot.setAttribute('class', 'carrot');
   carrot.style.position = 'absolute';
@@ -102,7 +101,7 @@ function createCarrot() {
   carrot.style.left = `${x}px`;
   carrot.addEventListener('click', (e) => {
     field.removeChild(e.target);
-    onClickCarrot();
+    onCarrot();
   });
   return carrot;
 }
@@ -111,15 +110,13 @@ function createBug() {
   const bug = document.createElement('img');
   const x = randomWidthPosition();
   const y = randomHeightPosition();
-  // console.log(`x : ${x}`);
-  // console.log(`y : ${y}`);
   bug.setAttribute('src', './img/bug.png');
   bug.setAttribute('class', 'bug');
   bug.style.position = 'absolute';
   bug.style.top = `${y}px`;
   bug.style.left = `${x}px`;
   bug.addEventListener('click', () => {
-    onClickBug();
+    onBug();
   });
   return bug;
 }
@@ -131,31 +128,23 @@ function randomHeightPosition() {
   return Math.floor(Math.random() * (browserHeight - 500 + 1) + 500);
 }
 
-function onClickCarrot() {
+function onCarrot() {
   SCORE = SCORE + 1;
   carrotCount.innerHTML = SCORE;
   carrotSound.play();
   if (SCORE === 10 && COUNT >= 0) {
-    gameWinSound.play();
+    winSound.play();
     isPlayState = false;
-    stopBtn.classList.add('visibility');
     refleshPopup.classList.remove('hidden');
-    hideComment();
-    wonComment.classList.remove('hidden');
+    stopBtn.classList.add('visibility');
+    popupComment.innerHTML = 'YOU WON 🎉';
   }
 }
 
-function onClickBug() {
+function onBug() {
   bugSound.play();
   isPlayState = false;
   stopBtn.classList.add('visibility');
   refleshPopup.classList.remove('hidden');
-  hideComment();
-  lostComment.classList.remove('hidden');
-}
-
-function hideComment() {
-  replyComment.classList.add('hidden');
-  lostComment.classList.add('hidden');
-  wonComment.classList.add('hidden');
+  popupComment.innerHTML = 'YOU LOST 😜';
 }
